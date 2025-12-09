@@ -1,2 +1,1 @@
-# Dev-o-lution_2026
-Devolution karooooo
+# Dev-o-lution '26
