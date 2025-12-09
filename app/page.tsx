@@ -6,18 +6,21 @@ import { TracksSection } from "@/components/tracks-section"
 import { TimelineSection } from "@/components/timeline-section"
 import { SpeakersSection } from "@/components/speakers-section"
 import { Footer } from "@/components/footer"
+import { SmoothScrollWrapper } from "@/components/ui/smooth-scroll-wrapper"
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-hidden">
-      <Navbar />
-      <HeroSection />
-      <MarqueeStrip />
-      <AboutSection />
-      <TracksSection />
-      <TimelineSection />
-      <SpeakersSection />
-      <Footer />
-    </main>
+    <SmoothScrollWrapper>
+      <main className="min-h-screen overflow-x-hidden">
+        <Navbar />
+        <HeroSection />
+        <MarqueeStrip />
+        <AboutSection />
+        <TracksSection />
+        <TimelineSection />
+        <SpeakersSection />
+        <Footer />
+      </main>
+    </SmoothScrollWrapper>
   )
 }
