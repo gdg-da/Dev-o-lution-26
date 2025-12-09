@@ -118,17 +118,12 @@ export function MarqueeStrip() {
   }, [])
 
   return (
-    <div 
-      ref={containerRef}
-      className="bg-yellow-400 border-y-[4px] border-black py-4 overflow-hidden will-change-transform"
-      style={{ transformOrigin: "center center" }}
-    >
-      {/* First track - moves left */}
-      <div ref={track1Ref} className="flex whitespace-nowrap mb-2">
+    <div className="bg-yellow-400 border-y-4 border-black py-4 overflow-hidden">
+      <div className="animate-marquee flex whitespace-nowrap">
         {[...items, ...items, ...items, ...items].map((item, i) => (
           <span
-            key={`track1-${i}`}
-            className="font-[var(--font-display)] text-2xl md:text-3xl font-black uppercase mx-6 flex items-center gap-4 text-black"
+            key={i}
+            className="font-(--font-display) text-2xl md:text-3xl uppercase mx-6 flex items-center gap-4 text-black"
           >
             <span className="text-black/40">///</span>
             <span>{item}</span>
