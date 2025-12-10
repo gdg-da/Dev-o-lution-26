@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Brain, Link, Cloud, Smartphone, Database, Shield } from "lucide-react"
+import { getDeviceCapabilities, getRAFInterval } from "@/lib/mobile-optimization"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -79,6 +80,8 @@ export function HorizontalScrollSection() {
 
   useEffect(() => {
     if (!sectionRef.current) return
+    
+    const { isLowEndDevice, prefersReducedMotion } = getDeviceCapabilities()
 
     const ctx = gsap.context(() => {
       if (isMobile) {
@@ -248,8 +251,8 @@ export function HorizontalScrollSection() {
         <div className="relative z-10 max-w-lg mx-auto">
           {/* Heading */}
           <div ref={headingRef} className="text-center mb-10">
-            <h2 className="font-(--font-display) text-4xl font-black text-white uppercase mb-4">
-              <span className="bg-gradient-to-r from-yellow-400 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">
+            <h2 className="font-(--font-display) text-4xl text-white uppercase mb-4">
+              <span className="bg-linear-to-r from-yellow-400 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">
                 Event
               </span>{" "}
               Tracks
@@ -273,7 +276,7 @@ export function HorizontalScrollSection() {
                 }}
               >
                 {/* Card number */}
-                <div className="absolute top-2 right-3 font-(--font-display) text-5xl font-black text-current opacity-10">
+                <div className="absolute top-2 right-3 font-(--font-display) text-5xl text-current opacity-10">
                   0{index + 1}
                 </div>
 
@@ -284,7 +287,7 @@ export function HorizontalScrollSection() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-(--font-display) text-2xl font-black uppercase mb-2">
+                  <h3 className="font-(--font-display) text-2xl uppercase mb-2">
                     {track.title}
                   </h3>
 
@@ -324,7 +327,7 @@ export function HorizontalScrollSection() {
       <div className="fixed top-0 left-0 right-0 h-1 bg-black/20 z-50 hidden md:block">
         <div
           ref={progressRef}
-          className="h-full origin-left bg-gradient-to-r from-yellow-400 via-fuchsia-500 to-cyan-400"
+          className="h-full origin-left bg-linear-to-r from-yellow-400 via-fuchsia-500 to-cyan-400"
           style={{ transform: "scaleX(0)" }}
         />
       </div>
@@ -353,7 +356,7 @@ export function HorizontalScrollSection() {
         {/* Section header - fixed on left */}
         <div className="fixed left-8 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
           <div className="transform -rotate-90 origin-left whitespace-nowrap">
-            <span className="font-(--font-display) text-6xl font-black text-white/10 uppercase tracking-widest">
+            <span className="font-(--font-display) text-6xl text-white/10 uppercase tracking-widest">
               Event Tracks
             </span>
           </div>
@@ -366,10 +369,10 @@ export function HorizontalScrollSection() {
           style={{ transformStyle: "preserve-3d" }}
         >
           {/* Intro card */}
-          <div className="flex-shrink-0 w-[60vw] lg:w-[40vw] flex items-center justify-center">
+          <div className="shrink-0 w-[60vw] lg:w-[40vw] flex items-center justify-center">
             <div className="text-center">
-              <h2 className="font-(--font-display) text-5xl lg:text-7xl font-black text-white uppercase mb-6">
-                <span className="bg-gradient-to-r from-yellow-400 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">
+              <h2 className="font-(--font-display) text-5xl lg:text-7xl text-white uppercase mb-6">
+                <span className="bg-linear-to-r from-yellow-400 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent">
                   Event
                 </span>
                 <br />
@@ -394,7 +397,7 @@ export function HorizontalScrollSection() {
               ref={(el) => {
                 if (el) cardsRef.current[index] = el
               }}
-              className={`flex-shrink-0 w-[50vw] lg:w-[35vw] ${track.color} ${track.textColor} border-4 border-black p-8 lg:p-12 brutal-shadow-lg relative overflow-hidden group`}
+              className={`shrink-0 w-[50vw] lg:w-[35vw] ${track.color} ${track.textColor} border-4 border-black p-8 lg:p-12 brutal-shadow-lg relative overflow-hidden group`}
               style={{
                 transformStyle: "preserve-3d",
                 transform: `rotate(${(index % 2 === 0 ? -2 : 2)}deg)`,
@@ -413,7 +416,7 @@ export function HorizontalScrollSection() {
               <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/10 blur-xl" />
 
               {/* Card number */}
-              <div className="absolute top-4 right-4 font-(--font-display) text-6xl lg:text-8xl font-black text-current opacity-10">
+              <div className="absolute top-4 right-4 font-(--font-display) text-6xl lg:text-8xl text-current opacity-10">
                 0{index + 1}
               </div>
 
@@ -424,7 +427,7 @@ export function HorizontalScrollSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-(--font-display) text-3xl lg:text-5xl font-black uppercase mb-4">
+                <h3 className="font-(--font-display) text-3xl lg:text-5xl uppercase mb-4">
                   {track.title}
                 </h3>
 
@@ -454,9 +457,9 @@ export function HorizontalScrollSection() {
           ))}
 
           {/* End card */}
-          <div className="flex-shrink-0 w-[50vw] lg:w-[35vw] flex items-center justify-center">
+          <div className="shrink-0 w-[50vw] lg:w-[35vw] flex items-center justify-center">
             <div className="text-center">
-              <h3 className="font-(--font-display) text-4xl lg:text-5xl font-black text-white uppercase mb-4">
+              <h3 className="font-(--font-display) text-4xl lg:text-5xl text-white uppercase mb-4">
                 Ready to<br />
                 <span className="text-yellow-400">Join?</span>
               </h3>

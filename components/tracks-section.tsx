@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Brain, Link, Cloud, Smartphone, Database, Shield } from "lucide-react"
+import { getDeviceCapabilities } from "@/lib/mobile-optimization"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -68,6 +69,7 @@ export function TracksSection() {
     if (!sectionRef.current || !cardsRef.current) return
 
     const isMobile = window.innerWidth < 768
+    const { isLowEndDevice, prefersReducedMotion } = getDeviceCapabilities()
 
     const ctx = gsap.context(() => {
       // Heading animation with character split effect

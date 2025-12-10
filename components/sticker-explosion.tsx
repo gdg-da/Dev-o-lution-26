@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { getDeviceCapabilities, shouldDisableAnimation } from "@/lib/mobile-optimization"
 import { 
   Sparkles, Zap, Star, Heart, Flame, Music, 
   Rocket, Coffee, Code, Gamepad2, Pizza, PartyPopper 
@@ -33,6 +34,12 @@ interface StickerExplosionProps {
 export function StickerExplosion({ children, className = "" }: StickerExplosionProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const stickersRef = useRef<HTMLDivElement[]>([])
+  const { isLowEndDevice, prefersReducedMotion } = getDeviceCapabilities()
+  
+  // Disable on low-end devices or reduced motion
+  if (isLowEndDevice || prefersReducedMotion || shouldDisableAnimation('complex')) {
+    return <div className={className}>{children}</div>
+  }
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -296,8 +303,11 @@ export function ParallaxCard({ children, className = "", speed = 0.5 }: Parallax
 
       // 3D tilt on hover (desktop only)
       if (typeof window !== "undefined" && window.innerWidth >= 768) {
+        const card = cardRef.current
+        if (!card) return
+
         const handleMouseMove = (e: MouseEvent) => {
-          const rect = cardRef.current!.getBoundingClientRect()
+          const rect = card.getBoundingClientRect()
           const x = e.clientX - rect.left
           const y = e.clientY - rect.top
           const centerX = rect.width / 2
@@ -306,7 +316,7 @@ export function ParallaxCard({ children, className = "", speed = 0.5 }: Parallax
           const rotateX = (y - centerY) / 20
           const rotateY = (centerX - x) / 20
 
-          gsap.to(cardRef.current, {
+          gsap.to(card, {
             rotateX: -rotateX,
             rotateY: rotateY,
             duration: 0.5,
@@ -315,7 +325,7 @@ export function ParallaxCard({ children, className = "", speed = 0.5 }: Parallax
         }
 
         const handleMouseLeave = () => {
-          gsap.to(cardRef.current, {
+          gsap.to(card, {
             rotateX: 0,
             rotateY: 0,
             duration: 0.5,
@@ -323,12 +333,12 @@ export function ParallaxCard({ children, className = "", speed = 0.5 }: Parallax
           })
         }
 
-        cardRef.current.addEventListener("mousemove", handleMouseMove)
-        cardRef.current.addEventListener("mouseleave", handleMouseLeave)
+        card.addEventListener("mousemove", handleMouseMove)
+        card.addEventListener("mouseleave", handleMouseLeave)
 
         return () => {
-          cardRef.current?.removeEventListener("mousemove", handleMouseMove)
-          cardRef.current?.removeEventListener("mouseleave", handleMouseLeave)
+          card.removeEventListener("mousemove", handleMouseMove)
+          card.removeEventListener("mouseleave", handleMouseLeave)
         }
       }
     }, cardRef)
