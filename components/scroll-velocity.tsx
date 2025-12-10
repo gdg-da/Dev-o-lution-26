@@ -3,6 +3,7 @@
 import { useEffect, useRef, useMemo } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { getDeviceCapabilities, getRAFInterval } from "@/lib/mobile-optimization"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -34,9 +35,16 @@ export function ScrollVelocityText({
   useEffect(() => {
     if (!containerRef.current || !textRef.current) return
 
+    const { isMobile, prefersReducedMotion } = getDeviceCapabilities()
+    const rafInterval = getRAFInterval()
+    
+    // Disable on reduced motion preference
+    if (prefersReducedMotion) return
+
     const textWidth = textRef.current.offsetWidth / 4
     let animationFrameId: number
     let lastFrameTime = performance.now()
+    let frameCount = 0
 
     // Create single ScrollTrigger instance
     if (!scrollTriggerRef.current) {
@@ -52,11 +60,19 @@ export function ScrollVelocityText({
     }
 
     const animate = () => {
+      frameCount++
+      
+      // Limit frame rate on mobile devices
+      if (frameCount % rafInterval !== 0) {
+        animationFrameId = requestAnimationFrame(animate)
+        return
+      }
+      
       const now = performance.now()
       const deltaTime = (now - lastFrameTime) / 1000
 
       // Only update if velocity was recently changed (optimization)
-      if (now - lastVelocityUpdateRef.current < 100) {
+      if (now - lastVelocityUpdateRef.current < (isMobile ? 150 : 100)) {
         // Calculate velocity with scroll influence
         const targetVelocity = baseVelocity + Math.abs(scrollVelocityRef.current) * 5
         velocityRef.current += (targetVelocity - velocityRef.current) * 0.1

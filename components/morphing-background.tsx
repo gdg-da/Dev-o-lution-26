@@ -3,6 +3,7 @@
 import { useEffect, useRef, useMemo } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { getDeviceCapabilities, shouldDisableAnimation } from "@/lib/mobile-optimization"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -22,6 +23,11 @@ export function MorphingBackground() {
   const tweensRef = useRef<gsap.core.Tween[]>([])
 
   useEffect(() => {
+    const { isMobile, isLowEndDevice, prefersReducedMotion } = getDeviceCapabilities()
+    
+    // Disable morphing on low-end devices or reduced motion
+    if (isLowEndDevice || prefersReducedMotion) return
+    
     const ctx = gsap.context(() => {
       // Morphing animation for each blob - optimized
       const morphBlob = (pathRef: React.RefObject<SVGPathElement | null>, index: number) => {
@@ -36,43 +42,51 @@ export function MorphingBackground() {
         // Cache tweens for cleanup
         const tween1 = gsap.to(pathRef.current, {
           attr: { d: paths[1] },
-          duration: 4,
+          duration: isMobile ? 6 : 4, // Slower on mobile
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
-          repeatDelay: 0.5,
+          repeatDelay: isMobile ? 1 : 0.5,
         })
 
-        // Add rotation - separate animation
-        const tween2 = gsap.to(pathRef.current.parentElement, {
+        // Add rotation - separate animation (disable on mobile)
+        const tween2 = isMobile ? null : gsap.to(pathRef.current.parentElement, {
           rotation: 360,
           duration: 40 + index * 10,
           ease: "none",
           repeat: -1,
         })
 
-        // Subtle scale pulsing
-        const tween3 = gsap.to(pathRef.current, {
-          scale: 1.1,
-          duration: 3 + index,
+        // Subtle scale pulsing (disable on mobile)
+        const tween3 = isMobile ? null : gsap.to(pathRef.current, {
+          scale: 1.05, // Less scale on mobile
+          duration: 4 + index,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
         })
 
-        tweensRef.current.push(tween1, tween2, tween3)
+        tweensRef.current.push(tween1)
+        if (tween2) tweensRef.current.push(tween2)
+        if (tween3) tweensRef.current.push(tween3)
       }
 
       morphBlob(path1Ref, 0)
       morphBlob(path2Ref, 1)
       morphBlob(path3Ref, 2)
 
-      // Scroll-linked color shift - single trigger
+      // Scroll-linked color shift - single trigger (throttled on mobile)
+      let lastColorUpdate = 0
+      const colorThrottle = isMobile ? 200 : 0
+      
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: document.body,
         start: "top top",
         end: "bottom bottom",
         onUpdate: (self) => {
+          const now = Date.now()
+          if (now - lastColorUpdate < colorThrottle) return
+          lastColorUpdate = now
           const hue1 = gsap.utils.interpolate([48, 280, 180, 48], self.progress)
           const hue2 = gsap.utils.interpolate([180, 48, 280, 180], self.progress)
           const hue3 = gsap.utils.interpolate([280, 180, 48, 280], self.progress)
@@ -161,6 +175,11 @@ export function FloatingParticles() {
 
   useEffect(() => {
     if (!containerRef.current) return
+    
+    const { isMobile, isLowEndDevice, prefersReducedMotion } = getDeviceCapabilities()
+    
+    // Disable on reduced motion
+    if (prefersReducedMotion) return
 
     const particles = containerRef.current.querySelectorAll(".particle")
     
@@ -172,12 +191,15 @@ export function FloatingParticles() {
           y: Math.random() * window.innerHeight,
         })
 
-        // Floating animation - cache tweens
+        // Floating animation - cache tweens (simplified on mobile)
+        const duration = isMobile ? 8 + Math.random() * 4 : 5 + Math.random() * 5
+        const distance = isMobile ? 50 + Math.random() * 100 : 100 + Math.random() * 200
+        
         const tween1 = gsap.to(particle, {
-          y: `-=${100 + Math.random() * 200}`,
-          x: `+=${(Math.random() - 0.5) * 100}`,
+          y: `-=${distance}`,
+          x: `+=${(Math.random() - 0.5) * (isMobile ? 50 : 100)}`,
           opacity: 0,
-          duration: 5 + Math.random() * 5,
+          duration,
           repeat: -1,
           delay: index * 0.5,
           ease: "none",
@@ -234,12 +256,17 @@ export function FloatingParticles() {
     }
   }, [])
 
+  const { isMobile, isLowEndDevice } = getDeviceCapabilities()
+  
+  // Reduce particles based on device
+  const particleCount = isLowEndDevice ? 5 : isMobile ? 8 : 15
+  
   return (
     <div
       ref={containerRef}
       className="fixed inset-0 -z-5 pointer-events-none overflow-hidden"
     >
-      {[...Array(15)].map((_, i) => (
+      {[...Array(particleCount)].map((_, i) => (
         <div
           key={i}
           className="particle absolute w-1 h-1 rounded-full"

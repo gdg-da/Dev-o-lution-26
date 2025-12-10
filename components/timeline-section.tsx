@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Rocket, Users, Calendar, Trophy } from "lucide-react"
+import { getDeviceCapabilities } from "@/lib/mobile-optimization"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,16 +56,18 @@ export function TimelineSection() {
     if (!sectionRef.current || !timelineRef.current) return
 
     const isMobile = window.innerWidth < 768
+    const { isLowEndDevice, prefersReducedMotion } = getDeviceCapabilities()
     
     const ctx = gsap.context(() => {
-      // Marquee animation
-      if (marqueeRef.current) {
+      // Marquee animation (slower on mobile, skip on reduced motion)
+      if (marqueeRef.current && !prefersReducedMotion) {
         const marqueeWidth = marqueeRef.current.scrollWidth / 2
+        const duration = isLowEndDevice ? 25 : isMobile ? 20 : 15
         
         gsap.to(marqueeRef.current, {
           x: -marqueeWidth,
           ease: "none",
-          duration: 15,
+          duration,
           repeat: -1,
         })
       }
@@ -170,7 +173,7 @@ export function TimelineSection() {
             {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
               <span
                 key={i}
-                className="font-(--font-display) text-3xl md:text-5xl lg:text-6xl uppercase mx-4 md:mx-8 text-white font-black tracking-tight"
+                className="font-(--font-display) text-3xl md:text-5xl lg:text-6xl uppercase mx-4 md:mx-8 text-white tracking-tight"
               >
                 {item}
               </span>
@@ -182,7 +185,7 @@ export function TimelineSection() {
       <div className="px-4">
         <div className="max-w-4xl mx-auto">
           <div ref={headingRef} className="text-center mb-12 md:mb-16">
-            <h2 className="font-(--font-display) text-4xl sm:text-5xl md:text-7xl font-black uppercase inline-block">
+            <h2 className="font-(--font-display) text-4xl sm:text-5xl md:text-7xl uppercase inline-block">
               <span className="bg-black text-white px-3 md:px-4 py-2 border-[3px] border-black brutal-shadow rotate-1 inline-block">
                 The Flow
               </span>
@@ -193,7 +196,7 @@ export function TimelineSection() {
             {/* Timeline line */}
             <div
               ref={lineRef}
-              className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-yellow-400 via-cyan-400 to-violet-500 transform md:-translate-x-1/2 rounded-full"
+              className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-yellow-400 via-cyan-400 to-violet-500 transform md:-translate-x-1/2 rounded-full"
               style={{ transformOrigin: "top center" }}
             />
 
@@ -211,12 +214,12 @@ export function TimelineSection() {
                     className={`${step.color} ${step.textColor} border-[3px] border-black p-5 md:p-6 brutal-shadow transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#000]`}
                   >
                     <div className="flex items-center gap-2 md:gap-3 mb-3">
-                      <step.icon className="w-7 h-7 md:w-8 md:h-8 flex-shrink-0" strokeWidth={2.5} />
+                      <step.icon className="w-7 h-7 md:w-8 md:h-8 shrink-0" strokeWidth={2.5} />
                       <span className="bg-white text-black border-2 border-black px-2 md:px-3 py-1 font-bold text-xs md:text-sm uppercase">
                         {step.date}
                       </span>
                     </div>
-                    <h3 className="font-(--font-display) text-lg md:text-xl lg:text-2xl font-black uppercase mb-2 leading-tight">
+                    <h3 className="font-(--font-display) text-lg md:text-xl lg:text-2xl uppercase mb-2 leading-tight">
                       {step.title}
                     </h3>
                     <p className="font-medium opacity-80 text-sm md:text-base">{step.description}</p>
