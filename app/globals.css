@@ -119,6 +119,22 @@
   * {
     @apply border-black outline-ring/50;
   }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
   body {
     @apply bg-stone-100 text-black;
     background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
@@ -135,6 +151,137 @@
   box-shadow: 6px 6px 0px 0px #000;
 }
 
+/* ========================================
+   SMOOTH SCROLL & ANIMATION UTILITIES
+   ======================================== */
+
+/* GPU-accelerated transforms for smooth animations */
+.will-change-transform {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smooth scroll wrapper styles */
+.smooth-scroll-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Parallax container perspective */
+[style*="perspective"] {
+  transform-style: preserve-3d;
+}
+
+/* Magnetic button hover states */
+[data-magnetic] {
+  transition: transform 0.1s ease-out;
+}
+
+/* Reveal animation base states */
+[data-reveal] {
+  will-change: clip-path, opacity;
+}
+
+/* Stagger animation children */
+[data-stagger] > * {
+  will-change: transform, opacity;
+}
+
+/* Scale scroll elements */
+[data-scale-scroll] {
+  will-change: transform, opacity;
+}
+
+/* Split text characters */
+[data-split-text] > span {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Floating elements */
+[data-float] {
+  will-change: transform;
+}
+
+/* Parallax backgrounds */
+.parallax-bg {
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Parallax shapes */
+.parallax-shape {
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Highlight text animation */
+.highlight-text {
+  background-size: 0% 100%;
+  transition: background-size 0.5s ease-out;
+}
+
+/* Scroll progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #facc15 0%, #22d3ee 50%, #a855f7 100%);
+  transform-origin: left;
+  z-index: 9999;
+}
+
+/* Reduced motion preference support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .parallax-bg,
+  .parallax-shape,
+  [data-parallax],
+  [data-float] {
+    transform: none !important;
+  }
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Card hover lift effect */
+.card-hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0px 0px #000;
+}
+
+/* Text reveal mask */
+.text-reveal-mask {
+  overflow: hidden;
+}
+
+.text-reveal-mask > * {
+  transform: translateY(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.text-reveal-mask.revealed > * {
+  transform: translateY(0);
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -146,6 +293,20 @@
 
 .animate-marquee {
   animation: marquee 20s linear infinite;
+}
+
+/* Subtle grain texture overlay */
+.grain-overlay::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+  z-index: 9998;
 }
 
 .torn-paper-top {
