@@ -307,10 +307,10 @@ export function HorizontalScrollSection() {
           {/* CTA */}
           <div className="text-center mt-10">
             <a
-              href="#waitlist"
+              href="https://unstop.com/p/dev-o-lution-2026-google-developer-group-on-campus-daiict-1609021"
               className="inline-block bg-yellow-400 text-black border-3 border-black px-6 py-3 font-bold text-lg uppercase brutal-shadow hover:bg-white transition-colors duration-300"
             >
-              Get Notified →
+              REGISTER NOW →
             </a>
           </div>
         </div>
@@ -468,10 +468,10 @@ export function HorizontalScrollSection() {
                 <span className="text-yellow-400">Join?</span>
               </h3>
               <a
-                href="#waitlist"
+                href="https://unstop.com/p/dev-o-lution-2026-google-developer-group-on-campus-daiict-1609021"
                 className="inline-block bg-yellow-400 text-black border-4 border-black px-8 py-4 font-bold text-xl uppercase brutal-shadow-lg hover:bg-white hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_#facc15] transition-all duration-300"
               >
-                Get Notified →
+                REGISTER NOW →
               </a>
             </div>
           </div>

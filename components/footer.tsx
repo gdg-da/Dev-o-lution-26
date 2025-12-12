@@ -92,15 +92,24 @@ export function Footer() {
           {/* Left Column */}
           <div>
             <div ref={titleRef} className="mb-6">
-              <h3 className="font-[var(--font-display)] text-3xl md:text-4xl font-black uppercase mb-4">
+              <h3 className="font-(--font-display) text-3xl md:text-4xl uppercase mb-4">
                 <span className="text-yellow-400">DEVOLUTION</span> 2026
               </h3>
               <p className="text-white/80 text-lg">by DSC DAU (formerly GDG on Campus DAU)</p>
             </div>
 
             <p className="text-white/60 text-lg flex items-center gap-2">
-              Built with <span className="text-xl">💻</span> and <span className="text-xl">☕</span> at DAU
+              Built with <span className="text-xl">💻</span> and <span className="text-xl">☕</span>
             </p>
+            
+            <a
+              href="https://devolution25.dscdaiict.in"
+              target="_blank"
+              rel="noreferrer"
+              className="text-white/70 mb-8 text-sm uppercase tracking-wide hover:text-yellow-400 transition-colors"
+            >
+              Devolution 2025
+            </a>
 
             {/* Social Links */}
             <div ref={socialRef} className="flex gap-4 mt-8">
@@ -123,7 +132,7 @@ export function Footer() {
             ref={contactCardRef}
             className="relative bg-yellow-400 text-black border-[3px] border-black p-6 brutal-shadow-lg max-w-sm ml-auto"
           >
-            <h4 className="font-[var(--font-display)] text-xl font-black uppercase mb-4 border-b-2 border-black pb-2">
+            <h4 className="font-(--font-display) text-xl uppercase mb-4 border-b-2 border-black pb-2">
               📌 Contact Us
             </h4>
 
