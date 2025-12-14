@@ -20,7 +20,7 @@ DEVOLUTION is DSC DAU's (formerly GDG on Campus DAU) premier technology conferen
 - Custom cursor with dark/light mode detection
 - Scroll-triggered animations throughout
 - Morphing blob backgrounds
-- Velocity-based scroll effects
+- Velocity-based scroll effect
 - Fully responsive design for mobile and desktop
 
 ## Getting Started
