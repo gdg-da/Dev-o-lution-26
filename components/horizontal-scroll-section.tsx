@@ -443,7 +443,7 @@ export function HorizontalScrollSection() {
                 </p>
 
                 {/* Arrow */}
-                <div className="mt-8 flex items-center gap-3 opacity-50 group-hover:opacity-100 transition-colors">
+                {/* <div className="mt-8 flex items-center gap-3 opacity-50 group-hover:opacity-100 transition-colors">
                   <span className="font-bold uppercase tracking-wider">Explore Track</span>
                   <svg
                     className="w-6 h-6 transform group-hover:translate-x-2 transition-transform"
@@ -453,7 +453,7 @@ export function HorizontalScrollSection() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </div>
+                </div> */}
               </div>
 
               {/* Corner decorations */}

@@ -158,7 +158,7 @@ export default function SpeakersPage() {
       {/* Animated background elements - desktop only for performance */}
       <DesktopOnlyBackgrounds />
 
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Hero Section */}
       <section ref={heroRef} className="py-20 md:py-32 px-4 relative overflow-hidden">
@@ -394,7 +394,7 @@ export default function SpeakersPage() {
               Submit your proposal and join us in creating an unforgettable experience for the tech community.
             </p>
             <a
-              href="https://forms.gle/YourFormLink"
+              href="https://forms.gle/a5tJaSvh4CzmraxA6"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-black text-white border-[3px] border-black px-8 py-4 font-(--font-display) text-xl uppercase brutal-shadow-lg hover:shadow-[8px_8px_0px_0px_#000] hover:-translate-y-1 transition-all"

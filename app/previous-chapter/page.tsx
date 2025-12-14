@@ -353,7 +353,7 @@ export default function LastChapterPage() {
       {/* Animated background elements - desktop only for performance */}
       <DesktopOnlyBackgrounds />
 
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Hero Section */}
       <section ref={heroRef} className="py-20 md:py-32 px-4 relative overflow-hidden">
