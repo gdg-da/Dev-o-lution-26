@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Brain, Link, Cloud, Smartphone, Database, Shield } from "lucide-react"
+import { Brain, Link, Cloud, Smartphone, Database, Shield, Rocket } from "lucide-react"
 import { getDeviceCapabilities } from "@/lib/mobile-optimization"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -56,6 +56,14 @@ const tracks = [
     color: "bg-pink-400",
     textColor: "text-black",
     accent: "#f472b6",
+  },
+  {
+    title: "Startup & Innovation",
+    description: "Build products and scale your startup",
+    icon: Rocket,
+    color: "bg-fuchsia-500",
+    textColor: "text-white",
+    accent: "#d946ef",
   },
 ]
 

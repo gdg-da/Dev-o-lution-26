@@ -359,7 +359,6 @@ export function HeroSection() {
           ref={titleRef}
           className="mb-6 flex flex-col items-center"
           style={{
-            transformStyle: "preserve-3d",
             perspective: "1000px",
           }}
         >
@@ -370,7 +369,7 @@ export function HeroSection() {
               alt="DEVOLUTION 2026"
               width={1200}
               height={300}
-              className="w-full h-auto drop-shadow-[5px_5px_0px_#000]"
+              className="w-full h-auto"
               priority
             />
           </div>
