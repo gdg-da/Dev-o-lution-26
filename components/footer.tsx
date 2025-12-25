@@ -9,7 +9,7 @@ import { Twitter, Linkedin, Instagram, Mail, Phone, Github } from "lucide-react"
 gsap.registerPlugin(ScrollTrigger)
 
 const socialLinks = [
-  { icon: Twitter, label: "Twitter/X", href: "x.com/gdgdaiict.com" },
+  { icon: Twitter, label: "Twitter/X", href: "https://x.com/gdgdaiict" },
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/gdg-on-campus-daiict/" },
   { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gdg.daiict/" },
   { icon: Github, label: "GitHub", href: "https://github.com/ossdaiict" }
