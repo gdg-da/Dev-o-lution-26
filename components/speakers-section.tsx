@@ -31,7 +31,7 @@ const speakers: (Speaker | null)[] = [
     photo: "/current-chapter/speaker-images/Vaibhav_malpani.jpg",
     position: "Google Developer Expert (GDE) in CLoud",
     talkTitle: "Intro to AI agents and ADK",
-    intro: "Vaibhav is Technical Lead with 9+ years of expertise working with Cloud Technologies. He is also a Google developer expert in GCP. He like to write blogs on medium and share his knowledge in such events.",
+    intro: "Vaibhav Malpani is Technical Lead at Incedo Inc. with 9+ years of expertise working with Cloud Technologies. He is also a Google developer expert in GCP. He like to write blogs on medium and share his knowledge in such events.",
     isRevealed: true,
   },
   {
