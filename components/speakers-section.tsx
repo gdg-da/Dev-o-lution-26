@@ -68,6 +68,7 @@ const speakers: (Speaker | null)[] = [
     talkTitle: "How to build and ship full stack apps using Antigravity and Gemini 3",
     intro: "Jay Thakkar is a passionate Researcher in the field of AI and ML. As the Community Lead at TensorFlow User Groups Surat, he have orchestrated technical training sessions for over 500 developers, demonstrating his passion for knowledge dissemination and community development within the AI and tech sphere.",
     isRevealed: true,
+    isGDE: true,
   },
   null,
   null,
