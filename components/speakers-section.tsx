@@ -78,6 +78,14 @@ const speakers: (Speaker | null)[] = [
     intro: "Pratik Butani is an Engineering Lead at 7Span, with over a decade of experience in mobile technologies, specializing in Flutter and Android development. He is also currently serving as Marketing & Communication Lead at GDG Cloud Rajkot and Stack Overflow top contributor (ranked 85th in India, 6th in Gujarat).",
     isRevealed: true,
   },
+  {
+    name: "Ravi Rupareliya",
+    photo: "/current-chapter/speaker-images/Ravi_rupareliya.jpg",
+    position: "Expertise in Android and Firebase",
+    talkTitle: "Building Flutter Faster with AI: From Idea to App",
+    intro: "Ravi Rupareliya is a tech leader with 13+ years of experience in building scalable mobile and web applications. Ravi has led multiple projects combining mobile frontends with cloud-native backends, empowering teams to build production-grade solutions. He is passionate about bridging mobile development with Google cloud's capabilities and helping developers leverage modern tools to build intelligent, scalable and reliable application.",
+    isRevealed: true,
+  },
   null,
   null,
 ]
