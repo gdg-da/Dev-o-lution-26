@@ -74,7 +74,7 @@ const speakers: (Speaker | null)[] = [
     name: "Pratik Butani",
     photo: "/current-chapter/speaker-images/Pratik_bhutani.jpg",
     position: "Expertise in Mobile application development, Flutter and AI",
-    talkTitle: "Mobile application development, Flutter and AI",
+    talkTitle: "Building Flutter Faster with AI: From Idea to App",
     intro: "Pratik Butani is an Engineering Lead at 7Span, with over a decade of experience in mobile technologies, specializing in Flutter and Android development. He is also currently serving as Marketing & Communication Lead at GDG Cloud Rajkot and Stack Overflow top contributor (ranked 85th in India, 6th in Gujarat).",
     isRevealed: true,
   },
