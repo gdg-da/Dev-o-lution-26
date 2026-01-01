@@ -86,6 +86,14 @@ const speakers: (Speaker | null)[] = [
     intro: "Ravi Rupareliya is a tech leader with 13+ years of experience in building scalable mobile and web applications. He has led multiple projects combining mobile frontends with cloud-native backends, empowering teams to build production-grade solutions. He also has a 35k+ Reputation on Stackoverflow.",
     isRevealed: true,
   },
+  {
+    name: "Drijesh Patel",
+    photo: "/current-chapter/speaker-images/drijesh_patel.jpg",
+    position: "Expertise in Cybersecurity and Generative AI",
+    talkTitle: "AI Weaponization: Detecting & Defending Against AI-Powered Attacks",
+    intro: "Drijesh Patel is a Software Development Manager at IBM with having expertise in cybersecurity and generative AI. As a Cybersecurity Engineering Manager for QRadar at IBM, he led teams to deliver AI-powered, secure, and scalable solutions that drive real-world impact. Delivered over 300+ talks.",
+    isRevealed: true,
+  },
   null,
   null,
 ]
