@@ -111,6 +111,14 @@ const speakers: (Speaker | null)[] = [
     isRevealed: true,
     isGDE: true,
   },
+  {
+    name: "Jaydeep Adesara",
+    photo: "/current-chapter/speaker-images/jaydeep_adesara.jpeg",
+    position: "Expertise in AI Agents and AI Automation",
+    talkTitle: "Prompting Is Not Enough: The New Developer Skill Stack (2026 Edition)",
+    intro: "Jaydeep Adesara is an AI automation specialist and Founder & CEO of Conversantech, focused on replacing manual work with AI agents. With 10+ years building scalable systems, he helps developers leverage automation to build better products faster. Organiser of FlutterFlow Developer Group Rajkot and shares practical insights as a public speaker.",
+    isRevealed: true,
+  },
   null,
 ]
 
