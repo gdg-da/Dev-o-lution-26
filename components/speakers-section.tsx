@@ -102,6 +102,15 @@ const speakers: (Speaker | null)[] = [
     intro: "Shruti Mishra is a Lecturer at P. P. Savani University with a strong focus on applied Artificial Intelligence, Machine Learning, and Generative AI. She actively bridges academic foundations with real-world industry use cases, modern development practices, and cloud-based AI solutions.",
     isRevealed: true,
   },
+  {
+    name: "Anukriti Bansal",
+    photo: "/current-chapter/speaker-images/anukriti_bansal.jpg",
+    position: "Google Developer Expert (GDE) in Machine Learning",
+    talkTitle: "Building AI Workflow with Google ADK & Gemini",
+    intro: "Anukriti Bansal is a Researcher and Ph.D. from IIT Delhi with research interest area in computer vision, pattern recognition, data analysis, deep learning, and natural language processing. She is also a Google Developer Expert (GDE) in Machine Learning and currently a data scientist at LUMIQ.",
+    isRevealed: true,
+    isGDE: true,
+  },
   null,
   null,
 ]
