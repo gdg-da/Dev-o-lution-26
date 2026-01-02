@@ -112,7 +112,6 @@ const speakers: (Speaker | null)[] = [
     isGDE: true,
   },
   null,
-  null,
 ]
 
 // Glitch text characters for mystery effect
